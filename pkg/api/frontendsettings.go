@@ -197,6 +197,7 @@ func (hs *HTTPServer) getFrontendSettingsMap(c *models.ReqContext) (map[string]i
 		"unifiedAlerting": map[string]interface{}{
 			"minInterval": hs.Cfg.UnifiedAlerting.MinInterval.String(),
 		},
+		"tokenExpirationDayLimit": hs.Cfg.TokenExpirationDayLimit,
 	}
 
 	if hs.ThumbService != nil {

@@ -141,6 +141,8 @@ export class GrafanaBootConfig implements GrafanaConfig {
   rudderstackSdkUrl: undefined;
   rudderstackConfigUrl: undefined;
 
+  tokenExpirationDayLimit: undefined;
+
   constructor(options: GrafanaBootConfig) {
     this.bootData = options.bootData;
     this.isPublicDashboardView = options.bootData.settings.isPublicDashboardView;
