@@ -48,6 +48,10 @@ func ProvideServiceAccountsService(
 	serviceaccountsAPI := api.NewServiceAccountsAPI(cfg, s, ac, routeRegister, s.store, permissionService)
 	serviceaccountsAPI.RegisterAPIEndpoints()
 
+	if err := s.store.UpdateAPIKeysExpiryDate(context.Background(), cfg.TokenExpirationDayLimit); err != nil {
+		s.log.Error("Failed to update service account access tokens expiration dates", "error", err)
+	}
+
 	return s, nil
 }
 
