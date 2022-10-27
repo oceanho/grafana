@@ -71,7 +71,7 @@ schemagen: ## Do all CUE/Thema code generation
 	$(THEMA) lineage gen gobindings -l pkg/plugins/plugindef/plugindef.cue \
 		--no-embed --bindtype '*Plugindef' --private > pkg/plugins/plugindef/thema_bindings_gen.go
 	$(THEMA) lineage gen gotypes -l pkg/plugins/plugindef/plugindef.cue > pkg/plugins/plugindef/plugindef_gen.go
-	#$(THEMA) lineage gen jsonschema -l pkg/plugins/plugindef/plugindef.cue > docs/sources/developers/plugins/plugin.schema.json
+	$(THEMA) lineage gen jsonschema -l pkg/plugins/plugindef/plugindef.cue > docs/sources/developers/plugins/plugin.schema.json
 	$(GO) generate ./pkg/framework/coremodel
 	$(GO) generate ./public/app/plugins
 
