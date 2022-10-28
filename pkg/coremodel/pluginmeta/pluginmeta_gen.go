@@ -400,6 +400,9 @@ type Header struct {
 // THIS TYPE IS INTENDED FOR INTERNAL USE BY THE GRAFANA BACKEND, AND IS SUBJECT TO BREAKING CHANGES.
 // Equivalent Go types at stable import paths are provided in https://github.com/grafana/grok.
 type Include struct {
+	// RBAC action the user must have to access the route
+	Action *string `json:"action,omitempty"`
+
 	// Add the include to the side menu.
 	AddToNav *bool `json:"addToNav,omitempty"`
 
