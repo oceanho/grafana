@@ -148,7 +148,7 @@ seqs: [
 				// Role describes an RBAC role and its permissions
 				#Role: {
 					name: string,
-					displayName: string,
+					name: =~"^([A-Z][0-9A-Za-z ]+)$"
 					description: string,
 					permissions: [...#Permission]
 				}
