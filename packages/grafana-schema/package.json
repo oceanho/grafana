@@ -41,7 +41,7 @@
     "@swc/helpers": "0.4.12",
     "esbuild": "0.15.12",
     "rimraf": "3.0.2",
-    "rollup": "2.79.1",
+    "rollup": "3.2.5",
     "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-esbuild": "4.10.1",
     "rollup-plugin-node-externals": "^5.0.0",
