@@ -9,6 +9,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/grafana/alerting/alerting"
+
 	"github.com/grafana/grafana/pkg/services/ngalert/notifier/channels"
 	"github.com/grafana/grafana/pkg/services/ngalert/provisioning"
 	"github.com/grafana/grafana/pkg/services/notifications"
@@ -41,7 +43,7 @@ type MultiOrgAlertmanager struct {
 	logger   log.Logger
 
 	// clusterPeer represents the clustering peers of Alertmanagers between Grafana instances.
-	peer         ClusterPeer
+	peer         alerting.ClusterPeer
 	settleCancel context.CancelFunc
 
 	configStore AlertingStore
