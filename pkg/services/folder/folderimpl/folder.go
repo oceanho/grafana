@@ -32,7 +32,7 @@ type Service struct {
 	dashboardService dashboards.DashboardService
 	dashboardStore   dashboards.Store
 	searchService    *search.SearchService
-	features         *featuremgmt.FeatureManager
+	features         featuremgmt.FeatureToggles
 	permissions      accesscontrol.FolderPermissionsService
 
 	// bus is currently used to publish events that cause scheduler to update rules.
@@ -46,7 +46,7 @@ func ProvideService(
 	dashboardService dashboards.DashboardService,
 	dashboardStore dashboards.Store,
 	db db.DB, // DB for the (new) nested folder store
-	features *featuremgmt.FeatureManager,
+	features featuremgmt.FeatureToggles,
 	folderPermissionsService accesscontrol.FolderPermissionsService,
 	searchService *search.SearchService,
 ) folder.Service {
@@ -182,6 +182,15 @@ func (s *Service) Create(ctx context.Context, cmd *folder.CreateFolderCommand) (
 	saveDashboardCmd, err := s.dashboardService.BuildSaveDashboardCommand(ctx, dto, false, false)
 	if err != nil {
 		return nil, toFolderError(err)
+	}
+
+	if cmd.ParentUID != "" {
+		parentFolder, err := s.dashboardStore.GetFolderByUID(ctx, cmd.OrgID, cmd.ParentUID)
+		if err != nil {
+			return nil, err
+		}
+		saveDashboardCmd.FolderId = parentFolder.Id
+		saveDashboardCmd.FolderUid = cmd.ParentUID
 	}
 
 	dash, err := s.dashboardStore.SaveDashboard(ctx, *saveDashboardCmd)
